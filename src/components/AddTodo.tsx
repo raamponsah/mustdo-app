@@ -1,6 +1,30 @@
-export default function AddTodo(){
+import firebaseApp from "@/lib/firebaseApp";
+import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
+
+export default function AddTodo({user}){
+    const db = getFirestore(firebaseApp)
+
+    const router = useRouter()
+
+
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
+        const title = e.target.title.value
+        const description = e.target.description.value
+        console.log(title, description)
+
+        try{
+            await addDoc(collection(db, `${user?.email}` ),{title, description})
+            router.push('/')
+        }catch(e){
+            console.log(e)
+        }
+
+    }
+
     return <>
-            <form className="mt-5 min-w-full flex flex-col items-center space-y-4 justify-center">
+            <form onSubmit={handleSubmit} className="mt-5 min-w-full flex flex-col items-center space-y-4 justify-center">
                 <label htmlFor="Title">
                     <h4 className="text-2xl font-mono">Title</h4>
                     <input type="text" className="w-80 p-4 rounded-3xl" name="title"  />

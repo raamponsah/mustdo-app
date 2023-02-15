@@ -21,6 +21,6 @@ export default function AddPage(){
 
     return <>
     <Header user={user}/>
-        <AddTodo/>
+        <AddTodo user={user}/>
     </>
 }
