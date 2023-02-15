@@ -1,5 +1,4 @@
 import AccountButton from "@/components/AccountButton"
-import MyDropdown from "@/components/DropDown"
 import Header from "@/components/Header"
 import ItemListComponent from "@/components/ItemList"
 import firebaseApp from "@/lib/firebaseApp"

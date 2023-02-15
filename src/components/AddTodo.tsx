@@ -2,20 +2,20 @@ import firebaseApp from "@/lib/firebaseApp";
 import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 
-export default function AddTodo({user}){
+export default function AddTodo(props:{user:any}){
     const db = getFirestore(firebaseApp)
 
     const router = useRouter()
 
 
-    const handleSubmit = async (e)=>{
+    const handleSubmit = async (e:any)=>{
         e.preventDefault()
         const title = e.target.title.value
         const description = e.target.description.value
         console.log(title, description)
 
         try{
-            await addDoc(collection(db, `${user?.email}` ),{title, description})
+            await addDoc(collection(db, `${props.user?.email}` ),{title, description})
             router.push('/')
         }catch(e){
             console.log(e)

@@ -3,12 +3,12 @@ import { getFirestore, collection } from 'firebase/firestore';
 import Link from 'next/link';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
-const ItemListComponent = ({user, db}) => {
+const ItemListComponent = (props:{user:any, db:any}) => {
 
-  const collRef = collection(db, `${user?.email}`)
+  const collRef = collection(props.db, `${props.user?.email}`)
 
   const [value, loading, error] = useCollection(
-    collection(getFirestore(firebaseApp), `${user?.email}`),
+    collection(getFirestore(firebaseApp), `${props.user?.email}`),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
